@@ -1,2 +1,3 @@
 data/west-coast-lidar/west-coast-lidar.csv
 data/west-coast-lidar/west-coast-lidar-filtered.csv
+mapbox-token.js
