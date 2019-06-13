@@ -14,6 +14,6 @@
     "mapbox-gl": "^1.0.0"
   },
   "scripts": {
-    "start": "budo --live --open index.js"
+    "start": "budo --live --open"
   }
 }

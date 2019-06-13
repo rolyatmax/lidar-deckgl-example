@@ -11,9 +11,15 @@ const {color} = require('d3-color')
 const {interpolateCool} = require('d3-scale-chromatic')
 const MAPBOX_TOKEN = require('./mapbox-token')
 
-const LIDAR_DATA_PATH = 'data/west-coast-lidar/west-coast-lidar-filtered.csv'
-const CENTER = [-122.4787, 37.8209]
-const ZOOM = 15
+const WHICH_DATA = 0;
+
+const DATA = [
+  {
+    path: 'data/west-coast-lidar/west-coast-lidar-filtered.csv',
+    center: [-122.4787, 37.8209],
+    zoom: 15
+  }
+][WHICH_DATA]
 
 const mapContainer = document.body.appendChild(document.createElement('div'))
 mapContainer.style.width = '100vw'
@@ -27,15 +33,15 @@ mapboxgl.accessToken = MAPBOX_TOKEN
 const map = new mapboxgl.Map({
   container: mapContainer,
   style: 'mapbox://styles/mapbox/light-v9',
-  center: CENTER,
-  zoom: ZOOM
+  center: DATA.center,
+  zoom: DATA.zoom
 })
 const deck = new Deck({gl: map.painter.context.gl})
 map.on('load', () => {
   map.addLayer(new MapboxLayer({id: 'mapbox-layer', deck}))
 })
 
-fetch(LIDAR_DATA_PATH)
+fetch(DATA.path)
   .then(res => res.text())
   .then(res => {
     console.log('loaded!')
